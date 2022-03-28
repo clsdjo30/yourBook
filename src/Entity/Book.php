@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\BookRepository;
-use Doctrine\DBAL\Types\DateImmutableType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,20 +27,15 @@ class Book
     #[Assert\Positive]
     private float $price;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 2, max: 50)]
-    private string $author;
-
     #[ORM\Column(type: 'string', length: 4)]
     #[Assert\NotBlank]
     private ?string $year;
 
+    #[ORM\ManyToOne(targetEntity: Author::class, inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Author $author;
 
-
-
-
-    public function getId(): ?int
+   public function getId(): ?int
     {
         return $this->id;
     }
@@ -70,7 +64,7 @@ class Book
         return $this;
     }
 
-    public function getPrice(int $int): ?float
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -78,18 +72,6 @@ class Book
     public function setPrice(float $price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -105,5 +87,19 @@ class Book
 
         return $this;
     }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+
 
 }

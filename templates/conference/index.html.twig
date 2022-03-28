@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConferenceController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Conferences</h1>
+    {% for conf in confs %}
+    <h2>Lieu de la conference : {{ dump(conf.city) }}</h2>
+
+    {% endfor %}
+    <br>
+    <h4>Afficher les commentaires</h4>
+    {% for comm in comms %}
+        <ul>
+            <li>
+                {{ dump(comm.text) }}
+            </li>
+        </ul>
+    {% endfor %}
+</div>
+{% endblock %}

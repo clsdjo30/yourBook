@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre étagère{% endblock %}
+
+{% block body %}
+    <div class="container ">
+        <div class="d-flex justify-content-center align-items-center mt-3">
+            <h1 class="display-4 mb-3">Mes Livres</h1>
+        </div>
+        <div class="d-flex justify-content-around flex-wrap">
+            {% for book in books %}
+                <div class="card bg-dark mb-3" style="max-width: 20rem;">
+
+                    <div class="card-header text-info text-uppercase">{{ book.title }}</div>
+                    <div class="card-body">
+
+                        <h4 class="card-title text-warning text-capitalize">{{ book.author.firstname}} {{ book.author.lastname}}</h4>
+
+                        <p class="card-text text-white">{{ book.description }}</p>
+                        <p>Date de publication : {{ book.year }}</p>
+                    </div>
+                    <div class="d-flex text-white justify-content-end align-content-center px-3 mb-3">Prix
+                        : {{ book.price }}€
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+            <div class="pagination d-flex justify-content-center align-items-center my-4">
+                {{ knp_pagination_render(books) }}
+            </div>
+
+
+
+
+
+
+    </div>
+{% endblock %}
+
+
+
