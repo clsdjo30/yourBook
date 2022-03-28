@@ -35,6 +35,9 @@ class Book
     #[ORM\JoinColumn(nullable: true)]
     private ?Author $author;
 
+    #[ORM\Column(type: 'object', nullable: true)]
+    private $image;
+
    public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,18 @@ class Book
     public function setAuthor(?Author $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
